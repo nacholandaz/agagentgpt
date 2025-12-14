@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  handle        String   @unique
+  name          String
+  email         String   @unique
+  passwordHash  String
+  level         Int      @default(1) // 1-5, where 5 = Core
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  invitedBy     String?  // handle of inviter
+  isActive      Boolean  @default(true)
+
+  // Relations
+  sentInvites       Invite[]              @relation("Inviter")
+  receivedInvites   Invite[]              @relation("Invitee")
+  createdRequests   LevelChangeRequest[] @relation("Creator")
+  targetRequests    LevelChangeRequest[] @relation("Target")
+  votes             Vote[]
+  levelHistory      UserLevelHistory[]
+
+  @@index([level])
+  @@index([handle])
+  @@index([email])
+}
+
+model Invite {
+  id          String   @id @default(cuid())
+  token       String   @unique
+  email       String
+  handle      String
+  inviterId   String
+  inviter     User     @relation("Inviter", fields: [inviterId], references: [id])
+  inviteeId   String?  // Set when invite is accepted
+  invitee     User?    @relation("Invitee", fields: [inviteeId], references: [id])
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  isUsed      Boolean  @default(false)
+
+  @@index([token])
+  @@index([email])
+}
+
+model LevelChangeRequest {
+  id              String   @id @default(cuid())
+  creatorId       String
+  creator         User     @relation("Creator", fields: [creatorId], references: [id])
+  targetId        String
+  target          User     @relation("Target", fields: [targetId], references: [id])
+  fromLevel       Int
+  toLevel         Int
+  reason          String?
+  status          String   @default("PENDING") // PENDING, APPROVED, REJECTED, CANCELLED
+  requiredVotes   Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  resolvedAt      DateTime?
+
+  votes           Vote[]
+
+  @@index([status])
+  @@index([targetId])
+  @@index([creatorId])
+}
+
+model Vote {
+  id          String   @id @default(cuid())
+  requestId   String
+  request     LevelChangeRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  voterId     String
+  voter       User     @relation(fields: [voterId], references: [id])
+  vote        String   // FOR, AGAINST
+  comment     String?
+  createdAt   DateTime @default(now())
+
+  @@unique([requestId, voterId])
+  @@index([requestId])
+  @@index([voterId])
+}
+
+model UserLevelHistory {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  fromLevel   Int
+  toLevel     Int
+  reason      String?
+  requestId   String?  // Reference to LevelChangeRequest if applicable
+  changedBy   String?  // handle of who made the change
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model SystemConfig {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?  // handle
+
+  @@index([key])
+}
+
