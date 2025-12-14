@@ -32,11 +32,11 @@ For production, you'll want to:
    PORT=3000
    NODE_ENV=production
    BASE_URL=https://your-app.railway.app
-   EMAIL_FROM=hq@fronesis.mx
+   EMAIL_FROM=core@cocentrica.org
    SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
    SMTP_SECURE=false
-   SMTP_USER=hq@fronesis.mx
+   SMTP_USER=core@cocentrica.org
    SMTP_PASS=<your-app-password>
    JWT_SECRET=<generate-strong-secret>
    ```

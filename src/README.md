@@ -73,12 +73,12 @@ BASE_URL=http://localhost:3000  # Update with ngrok URL for local dev
 # Database
 DATABASE_URL=postgresql://user:password@localhost:5432/cocentrica
 
-# Email (Google Workspace: hq@fronesis.mx)
-EMAIL_FROM=hq@fronesis.mx
+# Email Configuration
+EMAIL_FROM=core@cocentrica.org
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=hq@fronesis.mx
+SMTP_USER=core@cocentrica.org
 SMTP_PASS=<google-app-password>
 
 # Security

@@ -45,7 +45,7 @@ npm run prisma:migrate
 
 ```bash
 # Set seed variables
-export SEED_EMAIL="hq@fronesis.mx"  # Use your actual email
+export SEED_EMAIL="core@cocentrica.org"  # Use your actual email
 export SEED_HANDLE="admin"
 export SEED_NAME="Admin User"
 export SEED_PASSWORD="your-secure-password"
@@ -65,7 +65,7 @@ You need SMTP to send email responses. You have Gmail configured, but need to se
 ### 2.1 Get Gmail App Password
 
 1. Go to https://myaccount.google.com/apppasswords
-2. Sign in with `hq@fronesis.mx`
+2. Sign in with `core@cocentrica.org`
 3. If 2-Step Verification isn't enabled, enable it first
 4. Create an App Password:
    - Select "Mail" as the app
@@ -76,11 +76,11 @@ You need SMTP to send email responses. You have Gmail configured, but need to se
 ### 2.2 Update `.env` with App Password
 
 ```env
-EMAIL_FROM=hq@fronesis.mx
+EMAIL_FROM=core@cocentrica.org
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=hq@fronesis.mx
+SMTP_USER=core@cocentrica.org
 SMTP_PASS=abcdefghijklmnop  # Paste your 16-char app password here (no spaces)
 ```
 
@@ -182,7 +182,7 @@ npm run dev
 curl -X POST http://localhost:3000/inbound/email \
   -H "Content-Type: application/json" \
   -d '{
-    "from": "hq@fronesis.mx",
+    "from": "core@cocentrica.org",
     "subject": "ME",
     "text": "ME"
   }'
@@ -199,7 +199,7 @@ curl -X POST http://localhost:3000/inbound/email \
 
 2. **Send an email** to your SendGrid address (e.g., `test@mail.yourdomain.inbound.sendgrid.net`):
    - **To**: Your SendGrid email address
-   - **From**: `hq@fronesis.mx` (the email you seeded)
+   - **From**: `core@cocentrica.org` (the email you seeded)
    - **Subject**: `ME`
    - **Body**: `ME`
 
@@ -250,7 +250,7 @@ SMTP_PASS=
 curl -X POST http://localhost:3000/inbound/email \
   -H "Content-Type: application/json" \
   -d '{
-    "from": "hq@fronesis.mx",
+    "from": "core@cocentrica.org",
     "subject": "ME",
     "text": "ME"
   }'

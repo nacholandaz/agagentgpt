@@ -21,7 +21,7 @@ Your server expects webhooks at `POST /inbound/email` with email data. The route
 4. **Click**: "Add Host & URL"
 5. **Configure**:
    - **Subdomain**: `mail` (or any subdomain)
-   - **Domain**: Your domain (e.g., `fronesis.mx`) or use SendGrid's domain
+   - **Domain**: Your domain (e.g., `cocentrica.org`) or use SendGrid's domain
    - **Destination URL**: `https://your-ngrok-url.ngrok-free.app/inbound/email`
    - **Check**: "POST the raw, full MIME message"
 6. **Update DNS**:
@@ -104,7 +104,7 @@ This is more complex but very scalable for production.
    - Go to Email → Email Routing
    - Enable Email Routing
 2. **Add destination**:
-   - Create email address (e.g., `commands@fronesis.mx`)
+   - Create email address (e.g., `commands@cocentrica.org`)
    - Set action: "Send to HTTP endpoint"
    - URL: `https://your-ngrok-url.ngrok-free.app/inbound/email`
 3. **Update DNS**:

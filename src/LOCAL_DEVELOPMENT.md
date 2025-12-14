@@ -7,7 +7,7 @@ This guide will help you run the Cocéntrica email system locally using ngrok to
 1. **Node.js** installed (v18+ recommended)
 2. **PostgreSQL** database running locally or remotely
 3. **ngrok** account and CLI installed
-4. **Google Workspace** account (hq@fronesis.mx) with App Password
+4. **Email account** (core@cocentrica.org) with App Password or SMTP credentials
 
 ## Step 1: Install ngrok
 
@@ -38,12 +38,12 @@ BASE_URL=http://localhost:3000
 # Database
 DATABASE_URL=postgresql://user:password@localhost:5432/cocentrica
 
-# Email Configuration - Google Workspace
-EMAIL_FROM=hq@fronesis.mx
+# Email Configuration
+EMAIL_FROM=core@cocentrica.org
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=hq@fronesis.mx
+SMTP_USER=core@cocentrica.org
 SMTP_PASS=YOUR_APP_PASSWORD_HERE
 
 # Security
@@ -59,7 +59,7 @@ CORE_REQUIRED_VOTES=3
 ## Step 3: Get Google App Password
 
 1. Go to https://myaccount.google.com/apppasswords
-2. Sign in with hq@fronesis.mx
+2. Sign in with core@cocentrica.org
 3. If 2-Step Verification isn't enabled, enable it first
 4. Create an App Password for "Mail"
 5. Copy the 16-character password and paste it in your `.env` file
