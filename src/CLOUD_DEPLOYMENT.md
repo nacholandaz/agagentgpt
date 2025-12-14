@@ -313,7 +313,7 @@ Consider adding:
 2. **Database**: Managed PostgreSQL (included or separate)
 3. **Email Webhooks**: Mailgun or SendGrid
 4. **Monitoring**: UptimeRobot + Sentry
-5. **Domain**: Your existing domain (fronesis.mx)
+5. **Domain**: Your existing domain (cocentrica.org)
 
 ---
 
