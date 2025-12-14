@@ -100,8 +100,8 @@ Railway will automatically:
 5. **Set secrets**:
    ```bash
    fly secrets set DATABASE_URL=...
-   fly secrets set EMAIL_FROM=hq@fronesis.mx
-   fly secrets set SMTP_USER=hq@fronesis.mx
+   fly secrets set EMAIL_FROM=core@cocentrica.org
+   fly secrets set SMTP_USER=core@cocentrica.org
    fly secrets set SMTP_PASS=...
    fly secrets set JWT_SECRET=...
    fly secrets set BASE_URL=https://your-app.fly.dev
@@ -208,12 +208,12 @@ BASE_URL=https://your-production-url.com
 # Database
 DATABASE_URL=postgresql://user:pass@host:5432/db
 
-# Email (Google Workspace)
-EMAIL_FROM=hq@fronesis.mx
+# Email Configuration
+EMAIL_FROM=core@cocentrica.org
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_SECURE=false
-SMTP_USER=hq@fronesis.mx
+SMTP_USER=core@cocentrica.org
 SMTP_PASS=<app-password>
 
 # Security
