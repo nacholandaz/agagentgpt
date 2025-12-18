@@ -190,3 +190,4 @@ Once the server is running:
 - [ ] Server starts: `npm run dev`
 - [ ] Health check works: `curl http://localhost:3000/health`
 
+

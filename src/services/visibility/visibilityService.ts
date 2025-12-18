@@ -40,7 +40,7 @@ export async function getVisibleUsers(requesterLevel: number): Promise<VisibleUs
   return users.map(user => ({
     handle: user.handle,
     name: user.name,
-    email: requesterLevel === 5 ? user.email : undefined,
+    email: requesterLevel === 5 ? (user.email ?? undefined) : undefined,
     level: user.level,
   }));
 }
@@ -74,7 +74,7 @@ export async function getVisibleUser(
   return {
     handle: user.handle,
     name: user.name,
-    email: requesterLevel === 5 ? user.email : undefined,
+    email: requesterLevel === 5 ? (user.email ?? undefined) : undefined,
     level: user.level,
   };
 }

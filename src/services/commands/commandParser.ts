@@ -21,7 +21,11 @@ export function parseCommand(body: string): ParsedCommand {
     return { type: 'UNKNOWN', args: {} };
   }
   
-  const firstLine = lines[0].toUpperCase().trim();
+  const firstLine = lines[0]?.toUpperCase().trim() || '';
+  
+  if (!firstLine) {
+    return { type: 'UNKNOWN', args: {} };
+  }
   
   // Check for command type
   let commandType: CommandType = 'UNKNOWN';

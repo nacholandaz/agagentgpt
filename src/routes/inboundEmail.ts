@@ -40,7 +40,7 @@ function extractEmail(from: string | undefined): string | null {
   
   // Handle "Name <email@example.com>" format
   const match = from.match(/<([^>]+)>/);
-  if (match) {
+  if (match && match[1]) {
     return match[1].trim();
   }
   

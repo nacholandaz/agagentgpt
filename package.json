@@ -1,6 +1,7 @@
 {
   "name": "cocentrica-core",
   "version": "1.0.0",
+  "type": "module",
   "description": "Email-driven governance system for Cocéntrica",
   "main": "dist/server.js",
   "scripts": {
@@ -15,7 +16,8 @@
     "db:reset": "prisma migrate reset",
     "test:local": "tsx test-local.ts",
     "test:commands": "./test-commands.sh",
-    "test:email": "node test-email.js"
+    "test:email": "node test-email.js",
+    "test:simulator": "tsx test-simulator.ts"
   },
   "keywords": [],
   "author": "",

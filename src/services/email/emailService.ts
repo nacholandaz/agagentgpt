@@ -1,14 +1,20 @@
 import nodemailer from 'nodemailer';
 import { CONFIG } from '../../config.js';
 import { sanitizeText } from '../visibility/visibilityService.js';
+import { emailSimulator } from './emailSimulator.js';
 
 /**
  * Email Service
  * 
  * Handles all outbound email with visibility filtering
+ * Supports simulator mode for testing
  */
 
-const transporter = nodemailer.createTransport({
+// Check if simulator mode is enabled
+const USE_SIMULATOR = process.env.EMAIL_SIMULATOR === 'true' || 
+                      process.env.NODE_ENV === 'test';
+
+const transporter = !USE_SIMULATOR ? nodemailer.createTransport({
   host: CONFIG.email.smtp.host,
   port: CONFIG.email.smtp.port,
   secure: CONFIG.email.smtp.secure,
@@ -18,7 +24,7 @@ const transporter = nodemailer.createTransport({
         pass: CONFIG.email.smtp.auth.pass,
       }
     : undefined,
-});
+}) : null;
 
 /**
  * Sends an email with visibility filtering
@@ -32,6 +38,12 @@ export async function sendEmail(
   // Sanitize text to remove hints of higher levels
   const sanitizedText = sanitizeText(text, requesterLevel);
   
+  if (USE_SIMULATOR) {
+    // Use simulator instead of real SMTP
+    await emailSimulator.sendEmail(to, subject, sanitizedText, requesterLevel);
+    return;
+  }
+
   const mailOptions = {
     from: CONFIG.email.from,
     to,
@@ -40,7 +52,7 @@ export async function sendEmail(
   };
   
   try {
-    await transporter.sendMail(mailOptions);
+    await transporter!.sendMail(mailOptions);
   } catch (error) {
     console.error('Failed to send email:', error);
     throw new Error('Failed to send email');
@@ -106,4 +118,7 @@ If you believe this is an error, please contact support.`;
   
   await sendEmail(to, 'Not authorized', text, 5);
 }
+
+// Export simulator for access
+export { emailSimulator };
 

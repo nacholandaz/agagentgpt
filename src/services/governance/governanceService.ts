@@ -32,17 +32,17 @@ export async function getSystemMode(): Promise<SystemMode> {
 /**
  * Sets system mode
  */
-export async function setSystemMode(mode: SystemMode, updatedBy?: string): Promise<void> {
+export async function setSystemMode(mode: SystemMode, updatedBy: string | null = null): Promise<void> {
   await prisma.systemConfig.upsert({
     where: { key: 'system_mode' },
     create: {
       key: 'system_mode',
       value: mode,
-      updatedBy,
+      updatedBy: updatedBy ?? null,
     },
     update: {
       value: mode,
-      updatedBy,
+      updatedBy: updatedBy ?? null,
     },
   });
 }

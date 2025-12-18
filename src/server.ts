@@ -4,6 +4,7 @@ import formbody from '@fastify/formbody';
 import { CONFIG } from './config.js';
 import { registerInboundEmailRoute } from './routes/inboundEmail.js';
 import { registerAcceptInviteRoute } from './routes/acceptInvite.js';
+import { registerEmailSimulatorRoute } from './routes/emailSimulator.js';
 
 const fastify = Fastify({
   logger: true,
@@ -22,6 +23,7 @@ const start = async () => {
     // Register routes
     await fastify.register(registerInboundEmailRoute);
     await fastify.register(registerAcceptInviteRoute);
+    await fastify.register(registerEmailSimulatorRoute);
 
     // Health check
     fastify.get('/health', async () => {
